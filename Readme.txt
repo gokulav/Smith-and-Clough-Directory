@@ -1,6 +1,8 @@
 LIVE:
 https://www.smithandclough.com/index.php?route=common/home
 
+
+TEST SERVER:
 https://smith-and-clough-com.stackstaging.com/
 
 
