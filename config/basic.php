@@ -7,7 +7,7 @@
   'currency_symbol' => '£',
   'theme' => 'classic',
   'fraction_number' => 0,
-  'paginate' => 20,
+  'paginate' => 25,
   'email_verification' => 0,
   'email_notification' => 0,
   'sms_verification' => 0,

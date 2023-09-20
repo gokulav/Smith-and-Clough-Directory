@@ -1,19 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700;800&display=swap");
 
 :root {
-    --primary: #2c2e76;
-    --secondary: #1a1b3b;
+    --primary: #184af9;
+    --secondary: #e85f4c;
     --white: #fff;
     --black: #141720;
     --bgLight: #f7f7f8;
     --bgDark: #353535;
     --bgDark2: #323546;
-    --bgLight2: #eee;
     --borderColor: #e4e6eb;
     --gray: #727272;
     --textColor: #353535;
     --shadow: 0px 2px 16.8px 3.2px rgba(0, 38, 66, 0.08);
-    --bgGradient: #1a1b3b;
+    --bgGradient: #e85f4c;
     --gold: #ffc100;
 }
 
@@ -796,7 +795,7 @@ a.btn-custom {
 
 .home-section .text-box h1 {
     color: var(--white);
-    font-size: 60px;
+    font-size: 80px;
     text-transform: capitalize;
 }
 
@@ -821,7 +820,7 @@ a.btn-custom {
     box-shadow: var(--shadow);
     padding: 0px;
     border-radius: 5px;
-    margin: 50px 50px 0 50px;
+    margin: 50px 100px 0 100px;
 }
 
 .home-section .search-bar .input-box .input-group {
@@ -1033,8 +1032,8 @@ a.btn-custom {
 }
 
 .category-section {
-    padding: 40px 0;
-    background-color: var(--bgLight2);
+    padding: 70px 0;
+    background-color: var(--white);
 }
 
 .category-section .category-box {
@@ -1268,8 +1267,7 @@ a.btn-custom {
 
 .listing-box .img-box > img {
     width: 100%;
-    height: 220px !important;
-    object-fit: cover !important;
+    height: 300px !important;
 }
 
 .listing-box .img-box .save {
@@ -3201,15 +3199,11 @@ a.btn-custom {
 
 .testimonial-section {
     padding: 70px 0;
-    background: var(--secondary);
+    background: var(--bgLight);
 }
 
 .testimonial-section .header-text p {
     margin: auto;
-}
-
-.testimonial-section .header-text h3 {
-    color: var(--white);
 }
 
 .testimonial-section .review-box {
