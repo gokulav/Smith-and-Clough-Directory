@@ -332,6 +332,3 @@ $arr = [
 ];
 
 return $arr;
-
-
-
