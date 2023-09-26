@@ -148,7 +148,7 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
+                       <?php /* <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('admin.kyc.users.pending') }}"
                                aria-expanded="false">
                                 <i class="fas fa-spinner text-cyan"></i>
@@ -162,7 +162,7 @@
                                 <i class="fas fa-file text-success"></i>
                                 <span class="hide-menu">@lang('KYC Log')</span>
                             </a>
-                        </li>
+                        </li> */ ?>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('admin.email-send') }}"

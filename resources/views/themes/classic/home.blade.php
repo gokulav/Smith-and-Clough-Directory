@@ -1,26 +1,34 @@
 @extends($theme.'layouts.app')
-@section('title',trans('Home'))
+@section('t i tle',trans('Ho
+me'))
 
 @section('content')
+ 
 
       @include($theme.'partials.heroBanner')
 
      <!-- categroy section -->
      @include($theme.'sections.category')
 
+      <!--  Home Content listings -->
+      @include($theme.'sections.home-content')
+
      <!-- popular listings -->
+
      @include($theme.'sections.listing')
 
-     <!-- how it works section -->
-     @include($theme.'sections.how-it-work')
 
-     <!-- testimonial section -->
+
+     <!-- t e stimonial section -->
      @include($theme.'sections.testimonial')
 
-     <!-- blog section -->
+     <!-- b l og section -->
+
      @include($theme.'sections.blog')
 
-     <!-- newsletter -->
+     <!-- n e wsletter -->
+
      @include($theme.'sections.news-letter')
 
-@endsection
+@endsection  
+

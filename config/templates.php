@@ -13,6 +13,21 @@ return [
         ]
     ],
 
+    'home-content' => [
+        'field_name' => [
+            'title' => 'text',
+            'sub_title' => 'text',
+            'description' => 'textarea',
+            'image' => 'file'
+        ],
+        'validation' => [
+            'title.*' => 'required|max:100',
+            'sub_title.*' => 'required|max:191',
+            'description.*' => 'required|max:3000',
+            'image.*' => 'nullable|max:3072|image|mimes:jpg,jpeg,png',
+        ]
+    ],
+
     'about-us' => [
         'field_name' => [
             'title' => 'text',

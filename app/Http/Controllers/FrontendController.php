@@ -53,10 +53,12 @@ class FrontendController extends Controller
             ->whereHas('content', function ($query) use ($contentSection) {
                 return $query->whereIn('name', $contentSection);
             })
-            ->with(['content:id,name',
+            ->with([
+                'content:id,name',
                 'content.contentMedia' => function ($q) {
                     $q->select(['content_id', 'description', 'driver']);
-                }])
+                }
+            ])
             ->get()->groupBy('content.name');
 
         $data['popularBlogs'] = Blog::with(['details', 'blogCategory.details'])->where('status', 1)->take(3)->latest()->get();
@@ -113,10 +115,12 @@ class FrontendController extends Controller
             ->whereHas('content', function ($query) use ($contentSection) {
                 return $query->whereIn('name', $contentSection);
             })
-            ->with(['content:id,name',
+            ->with([
+                'content:id,name',
                 'content.contentMedia' => function ($q) {
                     $q->select(['content_id', 'description', 'driver']);
-                }])
+                }
+            ])
             ->get()->groupBy('content.name');
         return view($this->theme . 'about', $data);
     }
@@ -135,11 +139,11 @@ class FrontendController extends Controller
         $today = Carbon::now()->format('Y-m-d');
         $search = $request->all();
         $categoryIds = $request->category;
-        $data['all_listings'] = Listing::with(['get_user', 'get_place', 'get_reviews','get_package','listingSeo'])
+        $data['all_listings'] = Listing::with(['get_user', 'get_place', 'get_reviews', 'get_package', 'listingSeo'])
             ->when(isset($categoryIds), function ($query) use ($categoryIds) {
-                if (implode('',$categoryIds) == 'all'){
+                if (implode('', $categoryIds) == 'all') {
                     $query->where('status', 1)->where('is_active', 1);
-                }else{
+                } else {
                     foreach ($categoryIds as $key => $category_id) {
                         $query->whereJsonContains('category_id', $category_id);
                     }
@@ -148,16 +152,19 @@ class FrontendController extends Controller
             ->when(isset($id), function ($query) use ($id) {
                 return $query->whereJsonContains('category_id', $id);
             })
-            ->withCount(['getFavourite' , 'get_reviews as average_rating' => function($query) {
-                $query->select(DB::raw('coalesce(avg(rating2),0)'));
-            }])
+            ->withCount([
+                'getFavourite',
+                'get_reviews as average_rating' => function ($query) {
+                    $query->select(DB::raw('coalesce(avg(rating2),0)'));
+                }
+            ])
             ->whereHas('get_package', function ($query5) use ($today) {
                 return $query5->where('expire_date', '>=', $today)->orWhereNull('expire_date');
             })
             ->when(isset($search['name']), function ($query) use ($search) {
                 return $query->where('title', 'LIKE', "%{$search['name']}%")
                     ->orWhere('description', 'LIKE', "%{$search['name']}%")
-                    ->orWhereHas('listingSeo', function ($tQuery) use($search) {
+                    ->orWhereHas('listingSeo', function ($tQuery) use ($search) {
                         $tQuery->where('meta_keywords', 'LIKE', "%{$search['name']}%");
                     });
             })
@@ -180,22 +187,22 @@ class FrontendController extends Controller
                 $query5->orderByDesc('average_rating');
             })
             ->when($request->exists('popular') == false, function ($query5) use ($search) {
-                return $query5->orderBy('id','desc');
+                return $query5->orderBy('id', 'desc');
             })
             ->paginate(8);
 
-            $data['distinctUser'] = User::where('status',1)->where('email_verification',1)->where('sms_verification',1)->whereHas('get_listing', function ($query){
-                $query->where('status',1);
-            })->select(['id', 'username','firstname', 'lastname'])->tobase()->get()->map(function ($item){
-                $item->fullname = $item->firstname . ' ' . $item->lastname;
-                return $item;
-            });
+        $data['distinctUser'] = User::where('status', 1)->where('email_verification', 1)->where('sms_verification', 1)->whereHas('get_listing', function ($query) {
+            $query->where('status', 1);
+        })->select(['id', 'username', 'firstname', 'lastname'])->tobase()->get()->map(function ($item) {
+            $item->fullname = $item->firstname . ' ' . $item->lastname;
+            return $item;
+        });
 
 
-            $data['all_places'] = Place::with('details:id,place_id,place')->where('status', 1)->latest()->get();
+        $data['all_places'] = Place::with('details:id,place_id,place')->where('status', 1)->latest()->get();
 
-            $data['all_categories'] = ListingCategory::with('details:id,listing_category_id,name')->where('status', 1)->latest()->get();
-            return view($this->theme . 'listing', $data);
+        $data['all_categories'] = ListingCategory::with('details:id,listing_category_id,name')->where('status', 1)->latest()->get();
+        return view($this->theme . 'listing', $data);
     }
 
     public function category()
@@ -208,8 +215,8 @@ class FrontendController extends Controller
     public function listing_details($title = null, $id = null)
     {
         session()->put('listing_id', $id);
-        $single_listing_details = Listing::with(['get_package', 'get_user','get_user.get_social_links_user', 'get_listing_images', 'get_listing_amenities.get_amenity.details', 'get_products.get_product_image', 'get_business_hour', 'get_social_info','get_reviews', 'listingSeo'])
-            ->where('status',1)
+        $single_listing_details = Listing::with(['get_package', 'get_user', 'get_user.get_social_links_user', 'get_listing_images', 'get_listing_amenities.get_amenity.details', 'get_products.get_product_image', 'get_business_hour', 'get_social_info', 'get_reviews', 'listingSeo'])
+            ->where('status', 1)
             ->findOrFail($id);
 
 
@@ -227,10 +234,10 @@ class FrontendController extends Controller
 
         $data['category_wise_listing'] = Listing::with('get_user')
             ->where([
-                'user_id'=> $single_listing_details->user_id,
-                'category_id'=> $single_listing_details->category_id,
-                'status'=>1
-                ])
+                'user_id' => $single_listing_details->user_id,
+                'category_id' => $single_listing_details->category_id,
+                'status' => 1
+            ])
             ->where('id', '!=', $id)
             ->withCount('getFavourite')->limit(3)->latest()->get();
 
@@ -253,13 +260,13 @@ class FrontendController extends Controller
         $listingAnalytics->listing_id = $id;
         $listingAnalytics->visitor_ip = $viewer_ip;
 
-        $listingAnalytics->country = (!empty($browserInfo['country'])) ? implode($browserInfo['country']):null;
-        $listingAnalytics->city = (!empty($browserInfo['city'])) ? implode($browserInfo['city']):null;
-        $listingAnalytics->code = (!empty($browserInfo['code'])) ? implode($browserInfo['code']):null;
-        $listingAnalytics->lat = (!empty($browserInfo['lat'])) ? implode($browserInfo['lat']):null;
-        $listingAnalytics->long = (!empty($browserInfo['long'])) ? implode($browserInfo['long']):null;
-        $listingAnalytics->os_platform = $browserInfo['os_platform']??null;
-        $listingAnalytics->browser = $browserInfo['browser']??null;
+        $listingAnalytics->country = (!empty($browserInfo['country'])) ? implode($browserInfo['country']) : null;
+        $listingAnalytics->city = (!empty($browserInfo['city'])) ? implode($browserInfo['city']) : null;
+        $listingAnalytics->code = (!empty($browserInfo['code'])) ? implode($browserInfo['code']) : null;
+        $listingAnalytics->lat = (!empty($browserInfo['lat'])) ? implode($browserInfo['lat']) : null;
+        $listingAnalytics->long = (!empty($browserInfo['long'])) ? implode($browserInfo['long']) : null;
+        $listingAnalytics->os_platform = $browserInfo['os_platform'] ?? null;
+        $listingAnalytics->browser = $browserInfo['browser'] ?? null;
 
         $listingAnalytics->save();
         return view($this->theme . 'listing_details', $data, compact('id', 'title', 'average_review'));
@@ -407,10 +414,12 @@ class FrontendController extends Controller
             ->whereHas('content', function ($query) use ($contentSection) {
                 return $query->whereIn('name', $contentSection);
             })
-            ->with(['content:id,name',
+            ->with([
+                'content:id,name',
                 'content.contentMedia' => function ($q) {
                     $q->select(['content_id', 'description']);
-                }])
+                }
+            ])
             ->get()->groupBy('content.name');
 
         $data['increment'] = 1;
@@ -438,7 +447,7 @@ class FrontendController extends Controller
 
         $requestData = Purify::clean($request->except('_token', '_method'));
 
-        $basic = (object)config('basic');
+        $basic = (object) config('basic');
         $basicEmail = $basic->sender_email;
 
         $name = $requestData['name'];
@@ -470,10 +479,12 @@ class FrontendController extends Controller
             ->whereHas('content', function ($query) use ($contentSection) {
                 return $query->whereIn('name', $contentSection);
             })
-            ->with(['content:id,name',
+            ->with([
+                'content:id,name',
                 'content.contentMedia' => function ($q) {
                     $q->select(['content_id', 'description']);
-                }])
+                }
+            ])
             ->get()->groupBy('content.name');
 
         $title = @$contentDetail[$getData->name][0]->description->title;
@@ -503,7 +514,8 @@ class FrontendController extends Controller
     {
         $language = Language::where('short_name', $code)->first();
 
-        if (!$language) $code = 'US';
+        if (!$language)
+            $code = 'US';
         session()->put('trans', $code);
         session()->put('rtl', $language ? $language->rtl : 0);
 

@@ -650,6 +650,7 @@
                                 </div>
                             </div>
 
+                            <?php /*
                             @if(optional($single_listing_details->get_package)->is_business_hour != 0 && count($single_listing_details->get_business_hour) > 0)
                                 <div class="side-box">
                                     <h5>@lang('Opening Hours')</h5>
@@ -670,7 +671,8 @@
                                         @endforelse
                                     </ul>
                                 </div>
-                            @endif
+                            @endif */ 
+                            ?>
 
                             <div class="side-box">
                                 <h5>@lang('Contact Seller')</h5>
@@ -740,6 +742,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <?php /*
                             <div class="side-box claim-business">
                                 <div class="d-flex align-items-center">
                                     <img
@@ -753,7 +756,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */ ?>
                         </div>
                     </div>
                 </div>
