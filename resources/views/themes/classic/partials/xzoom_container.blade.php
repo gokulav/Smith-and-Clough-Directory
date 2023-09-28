@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<div class="info-box mb-5">
+<div class="info-box mb-2">
     <h4 class="title">{{ $single_listing_details->title }}</h4>
     <p class="p-0">@lang('Category'): {{ $single_listing_details->getCategoriesName() }} </p>
     @if($single_listing_details->address)
@@ -69,6 +69,6 @@
             title: $("title").text(),
         });
     </script>
-@endpush;
+@endpush
 
 

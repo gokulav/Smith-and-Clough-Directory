@@ -215,7 +215,7 @@
 
                         @include($theme.'partials.xzoom_container')
 
-                        <div class="navigation">
+                        <?php /* <div class="navigation">
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <span id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
@@ -277,9 +277,14 @@
                                     </span>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */ ?>
 
 
+<p>
+    {!! $single_listing_details->description !!}
+</p>
+                            
+<?php /*
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                  aria-labelledby="pills-home-tab" tabindex="0">
@@ -610,6 +615,7 @@
                                 </div>
                             </div>
                         </div>
+        */ ?>
                     </div>
 
                     <div class="col-lg-4">
@@ -650,6 +656,7 @@
                                 </div>
                             </div>
 
+                            <?php /*
                             @if(optional($single_listing_details->get_package)->is_business_hour != 0 && count($single_listing_details->get_business_hour) > 0)
                                 <div class="side-box">
                                     <h5>@lang('Opening Hours')</h5>
@@ -670,7 +677,8 @@
                                         @endforelse
                                     </ul>
                                 </div>
-                            @endif
+                            @endif */ 
+                            ?>
 
                             <div class="side-box">
                                 <h5>@lang('Contact Seller')</h5>
@@ -740,6 +748,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <?php /*
                             <div class="side-box claim-business">
                                 <div class="d-flex align-items-center">
                                     <img
@@ -753,7 +762,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */ ?>
                         </div>
                     </div>
                 </div>

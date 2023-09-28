@@ -148,21 +148,21 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?php echo e(route('admin.kyc.users.pending')); ?>"
+                       <?php /* <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('admin.kyc.users.pending') }}"
                                aria-expanded="false">
                                 <i class="fas fa-spinner text-cyan"></i>
-                                <span class="hide-menu"><?php echo app('translator')->get('Pending KYC'); ?></span>
+                                <span class="hide-menu">@lang('Pending KYC')</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="<?php echo e(route('admin.kyc.users')); ?>"
+                            <a class="sidebar-link" href="{{ route('admin.kyc.users') }}"
                                aria-expanded="false">
                                 <i class="fas fa-file text-success"></i>
-                                <span class="hide-menu"><?php echo app('translator')->get('KYC Log'); ?></span>
+                                <span class="hide-menu">@lang('KYC Log')</span>
                             </a>
-                        </li>
+                        </li> */ ?>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="<?php echo e(route('admin.email-send')); ?>"

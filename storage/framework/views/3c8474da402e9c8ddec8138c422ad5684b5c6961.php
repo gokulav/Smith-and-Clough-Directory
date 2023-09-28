@@ -21,9 +21,10 @@
                     <a class="nav-link <?php if($lastUriSegment == 'about'): ?> active <?php endif; ?>" href="<?php echo e(route('about')); ?>"><?php echo app('translator')->get('About'); ?></a>
                 </li>
 
+                <?php /*
                 <li class="nav-item">
-                    <a class="nav-link <?php if($lastUriSegment == 'pricing'): ?> active <?php endif; ?>" href="<?php echo e(route('pricing')); ?>"><?php echo app('translator')->get('Pricing'); ?></a>
-                </li>
+                    <a class="nav-link @if($lastUriSegment == 'pricing') active @endif" href="{{ route('pricing') }}">@lang('Pricing')</a>
+                </li> */ ?>
 
                 <li class="nav-item">
                     <a class="nav-link <?php if($lastUriSegment == 'listing'): ?> active <?php endif; ?>" href="<?php echo e(route('listing')); ?>"><?php echo app('translator')->get('Listing'); ?></a>

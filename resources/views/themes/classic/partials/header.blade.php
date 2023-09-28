@@ -21,9 +21,10 @@
                     <a class="nav-link @if($lastUriSegment == 'about') active @endif" href="{{ route('about') }}">@lang('About')</a>
                 </li>
 
+                <?php /*
                 <li class="nav-item">
                     <a class="nav-link @if($lastUriSegment == 'pricing') active @endif" href="{{ route('pricing') }}">@lang('Pricing')</a>
-                </li>
+                </li> */ ?>
 
                 <li class="nav-item">
                     <a class="nav-link @if($lastUriSegment == 'listing') active @endif" href="{{ route('listing') }}">@lang('Listing')</a>
