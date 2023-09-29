@@ -99,7 +99,6 @@ class ContentController extends Controller
                         $contentMediaDescription[$key] = $image['path'];
                         $contentMedia->driver = $image['driver'];
                     }
-
                 } elseif ($request->has($key)) {
                     $contentMediaDescription[$key] = linkToEmbed($purifiedData[$key][$language]);
                 }
@@ -183,7 +182,6 @@ class ContentController extends Controller
                         $contentMediaDescription[$key] = $image['path'];
                         $contentMedia->driver = $image['driver'];
                     }
-
                 } elseif ($request->has($key)) {
                     $contentMediaDescription[$key] = linkToEmbed($purifiedData[$key][$language]);
                 } elseif (isset($old_data)) {
@@ -246,7 +244,6 @@ class ContentController extends Controller
         ]);
 
         return redirect()->route('admin.blogCategory')->with('success', 'Blog Category Successfully Saved');
-
     }
 
     public function blogCategoryEdit($id)
@@ -278,9 +275,10 @@ class ContentController extends Controller
         $blogCategory = BlogCategory::findOrFail($id);
         $blogCategory->save();
 
-        $blogCategory->details()->updateOrCreate([
-            'language_id' => $language_id
-        ],
+        $blogCategory->details()->updateOrCreate(
+            [
+                'language_id' => $language_id
+            ],
             [
                 'name' => $purifiedData["name"][$language_id],
             ]
@@ -426,9 +424,10 @@ class ContentController extends Controller
 
         $blog->save();
 
-        $blog->details()->updateOrCreate([
-            'language_id' => $language_id
-        ],
+        $blog->details()->updateOrCreate(
+            [
+                'language_id' => $language_id
+            ],
             [
                 'author' => $purifiedData["author"][$language_id],
                 'title' => $purifiedData["title"][$language_id],
@@ -437,7 +436,6 @@ class ContentController extends Controller
         );
 
         return redirect()->route('admin.blogList')->with('success', 'Blog Successfully Updated');
-
     }
 
     public function blogDelete($id)

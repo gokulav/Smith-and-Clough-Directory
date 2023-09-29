@@ -58,7 +58,9 @@ return [
     'support' => [
         'field_name' => [
             'title' => 'text',
-            'description' => 'textarea'
+            'description' => 'textarea',
+            'menu_type' => 'select',
+            'parent_menu' => 'select'
         ],
         'validation' => [
             'title.*' => 'required|max:100',
