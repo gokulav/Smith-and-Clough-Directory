@@ -160,13 +160,17 @@
                                     </div>
 
                                     @elseif($type == 'select' && $name == 'menu_type')
+                                    @php
+                                    // echo "@@@@". $name;
+                                    $myVariableMenuType = old($name.'.'.$language->id, isset($contentDetails[$language->id]) ? $contentDetails[$language->id][0]->description->{$name} : '');
+                                    @endphp
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="{{ $name }}">@lang(ucwords(str_replace('_',' ',$name)))</label>
-                                            <select name="{{ $name }}" id="{{ $name }}" class="form-control">
+                                            <select name="{{ $name }}[{{ $language->id }}]" id="{{ $name }}" class="form-control">
                                                 <option value=''>Select</value>
-                                                <option value='H'>Header</option>
-                                                <option value='F'>Footer</option>
+                                                <option value='H' @if($myVariableMenuType=='H' ) selected="selected" @endif>Header</option>
+                                                <option value='F' @if($myVariableMenuType=='F' ) selected="selected" @endif>Footer</option>
                                             </select>
                                             <div class="invalid-feedback">
                                                 @error($name.'.'.$language->id) @lang($message) @enderror
@@ -174,15 +178,22 @@
                                         </div>
                                     </div>
                                     @elseif($type == 'select' && $name == 'parent_menu')
+                                    @php
+                                    $myVariableParentMenu = old($name.'.'.$language->id, isset($contentDetails[$language->id]) ? $contentDetails[$language->id][0]->description->{$name} : '');
+                                    @endphp
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="{{ $name }}">@lang(ucwords(str_replace('_',' ',$name)))</label>
-                                            <select name="{{ $name }}" id="{{ $name }}" class="form-control">
+                                            <select name="{{ $name }}[{{ $language->id }}]" id="{{ $name }}" class="form-control">
                                                 <option value=''>Select</value>
-                                                <option data-group="H" value='1'>Selling Your Business</option>
-                                                <option data-group="H" value='2'>Buying A Business</option>
-                                                <option data-group="F" value='3'>Quick Links</option>
-                                                <option data-group="F" value='4'>Our Company</option>
+
+                                                <option @if($myVariableMenuType=='H' ) style="display:block" @else style="display:none" @endif data-group="H" value='1' @if($myVariableParentMenu=='1' ) selected="selected" @endif>Selling Your Business</option>
+                                                <option @if($myVariableMenuType=='H' ) style="display:block" @else style="display:none" @endif data-group="H" value='2' @if($myVariableParentMenu=='2' ) selected="selected" @endif>Buying A Business</option>
+
+                                                <option @if($myVariableMenuType=='F' ) style="display:block" @else style="display:none" @endif data-group="F" value='3' @if($myVariableParentMenu=='3' ) selected="selected" @endif>Quick Links</option>
+                                                <option @if($myVariableMenuType=='F' ) style="display:block" @else style="display:none" @endif data-group="F" value='4' @if($myVariableParentMenu=='4' ) selected="selected" @endif>Our Company</option>
+
+
                                             </select>
                                             <div class="invalid-feedback">
                                                 @error($name.'.'.$language->id) @lang($message) @enderror
@@ -238,6 +249,25 @@
                     $(this).val(codeviewHtml);
                 }
             }
+        });
+
+
+
+        $("#menu_type").change(function() {
+
+            var filter = $(this).val();
+            $('#parent_menu option').each(function() {
+                // alert(filter);
+                if ($(this).data("group") == filter) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+                $('#menu_type').val(filter);
+
+            });
+
+            $('#parent_menu').val('');
         });
 
         $('.iconPicker').iconpicker({

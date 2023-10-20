@@ -113,7 +113,8 @@ unset($__errorArgs, $__bag); ?></div>
                     <div class="tab-content mt-2" id="myTabContent">
                         <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                        <?php print_r(config("contents.$content.field_name")); ?>
+                        <?php // print_r(config("contents.$content.field_name")); 
+                        ?>
                         <div class="tab-pane fade <?php echo e($loop->first ? 'show active' : ''); ?>" id="lang-tab-<?php echo e($key); ?>" role="tabpanel">
                             <form method="post" action="<?php echo e(route('admin.content.store', [$content,$language->id])); ?>" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
@@ -230,7 +231,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="<?php echo e($name); ?>"><?php echo app('translator')->get(ucwords(str_replace('_',' ',$name))); ?></label>
-                                            <select name="<?php echo e($name); ?>" id="<?php echo e($name); ?>" class="form-control">
+                                            <select name="<?php echo e($name); ?>[<?php echo e($language->id); ?>]" id="<?php echo e($name); ?>" class="form-control">
                                                 <option value=''>Select</value>
                                                 <option value='H'>Header</option>
                                                 <option value='F'>Footer</option>
@@ -251,9 +252,9 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="<?php echo e($name); ?>"><?php echo app('translator')->get(ucwords(str_replace('_',' ',$name))); ?></label>
-                                            <select name="<?php echo e($name); ?>" id="<?php echo e($name); ?>" class="form-control">
+                                            <select name="<?php echo e($name); ?>[<?php echo e($language->id); ?>]" id="<?php echo e($name); ?>" class="form-control">
                                                 <option value=''>Select</value>
-                                                <option data-group="H" value='1'>Selling Your Business</option>
+                                                <option data-group="H" value='1'><?php echo app('translator')->get('Selling Your Business'); ?></option>
                                                 <option data-group="H" value='2'>Buying A Business</option>
                                                 <option data-group="F" value='3'>Quick Links</option>
                                                 <option data-group="F" value='4'>Our Company</option>
@@ -360,8 +361,10 @@ unset($__errorArgs, $__bag); ?></div>
                     $(this).hide();
                 }
                 $('#menu_type').val(filter);
+
             });
 
+            $('#parent_menu').val('');
 
         });
 

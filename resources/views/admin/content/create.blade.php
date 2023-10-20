@@ -80,7 +80,8 @@
                     <div class="tab-content mt-2" id="myTabContent">
                         @foreach($languages as $key => $language)
 
-                        <?php print_r(config("contents.$content.field_name")); ?>
+                        <?php // print_r(config("contents.$content.field_name")); 
+                        ?>
                         <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="lang-tab-{{ $key }}" role="tabpanel">
                             <form method="post" action="{{ route('admin.content.store', [$content,$language->id]) }}" enctype="multipart/form-data">
                                 @csrf
@@ -148,7 +149,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="{{ $name }}">@lang(ucwords(str_replace('_',' ',$name)))</label>
-                                            <select name="{{ $name }}" id="{{ $name }}" class="form-control">
+                                            <select name="{{ $name }}[{{ $language->id }}]" id="{{ $name }}" class="form-control">
                                                 <option value=''>Select</value>
                                                 <option value='H'>Header</option>
                                                 <option value='F'>Footer</option>
@@ -162,12 +163,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="{{ $name }}">@lang(ucwords(str_replace('_',' ',$name)))</label>
-                                            <select name="{{ $name }}" id="{{ $name }}" class="form-control">
+                                            <select name="{{ $name }}[{{ $language->id }}]" id="{{ $name }}" class="form-control">
                                                 <option value=''>Select</value>
-                                                <option data-group="H" value='1'>Selling Your Business</option>
-                                                <option data-group="H" value='2'>Buying A Business</option>
-                                                <option data-group="F" value='3'>Quick Links</option>
-                                                <option data-group="F" value='4'>Our Company</option>
+                                                <option data-group="H" value='1'>@lang('Selling Your Business')</option>
+                                                <option data-group="H" value='2'>@lang('Buying A Business')</option>
+                                                <option data-group="F" value='3'>@lang('Quick Links')</option>
+                                                <option data-group="F" value='4'>@lang('Our Company')</option>
                                             </select>
                                             <div class="invalid-feedback">
                                                 @error($name.'.'.$language->id) @lang($message) @enderror
@@ -250,8 +251,10 @@
                     $(this).hide();
                 }
                 $('#menu_type').val(filter);
+
             });
 
+            $('#parent_menu').val('');
 
         });
 

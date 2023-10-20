@@ -8,8 +8,8 @@
             <i class="far fa-bars"></i>
         </button>
         <?php
-            $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-            $lastUriSegment = array_pop($uriSegments);
+        $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+        $lastUriSegment = array_pop($uriSegments);
         ?>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
@@ -34,6 +34,61 @@
                     <a class="nav-link <?php if($lastUriSegment == 'category'): ?> active <?php endif; ?>" href="<?php echo e(route('category')); ?>"><?php echo app('translator')->get('Category'); ?></a>
                 </li>
 
+
+                <?php if(isset($contentDetails['support'])): ?>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><?php echo app('translator')->get('Selling Your Busines'); ?></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <?php $__currentLoopData = $contentDetails['support']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                        $fldMenuType = ''; $fldparentMenu = '';
+                        $fldMenuType = ($data->description)->menu_type;
+                        $fldparentMenu = ($data->description)->parent_menu;
+                        ?>
+
+
+
+                        <?php if($fldMenuType == 'H' && $fldparentMenu == '1'): ?>
+
+                        <a class="dropdown-item" href="<?php echo e(route('getLink', [slug(optional($data->description)->title), $data->content_id])); ?>"><?php echo app('translator')->get(optional($data->description)->title); ?></a>
+
+                        <?php endif; ?>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><?php echo app('translator')->get('Buying A Business'); ?></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <?php $__currentLoopData = $contentDetails['support']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                        $fldMenuType = ''; $fldparentMenu = '';
+                        $fldMenuType = ($data->description)->menu_type;
+                        $fldparentMenu = ($data->description)->parent_menu;
+                        ?>
+
+
+
+                        <?php if($fldMenuType == 'H' && $fldparentMenu == '2'): ?>
+
+                        <a class="dropdown-item" href="<?php echo e(route('getLink', [slug(optional($data->description)->title), $data->content_id])); ?>"><?php echo app('translator')->get(optional($data->description)->title); ?></a>
+
+                        <?php endif; ?>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+
+                </li>
+
+                <?php endif; ?>
+
+
                 <li class="nav-item">
                     <a class="nav-link <?php if($lastUriSegment == 'contact'): ?> active <?php endif; ?>" href="<?php echo e(route('contact')); ?>"><?php echo app('translator')->get('Contact'); ?></a>
                 </li>
@@ -42,13 +97,12 @@
 
         <div class="navbar-text">
             <?php if(auth()->guard()->guest()): ?>
-                <a href="<?php echo e(route('login')); ?>" class="btn-custom"><?php echo app('translator')->get('Sign in'); ?></a>
+            <a href="<?php echo e(route('login')); ?>" class="btn-custom"><?php echo app('translator')->get('Sign in'); ?></a>
             <?php endif; ?>
 
             <?php if(auth()->guard()->check()): ?>
-                <a href="<?php echo e(route('user.home')); ?>" class="btn-custom"><?php echo app('translator')->get('Dashboard'); ?></a>
+            <a href="<?php echo e(route('user.home')); ?>" class="btn-custom"><?php echo app('translator')->get('Dashboard'); ?></a>
             <?php endif; ?>
         </div>
     </div>
-</nav>
-<?php /**PATH D:\wamp\www\Projects\smith-and-clough-com.stackstaging.com\Live-files-project\Smith-and-Clough-Directory\resources\views/themes/classic/partials/header.blade.php ENDPATH**/ ?>
+</nav><?php /**PATH D:\wamp\www\Projects\smith-and-clough-com.stackstaging.com\Live-files-project\Smith-and-Clough-Directory\resources\views/themes/classic/partials/header.blade.php ENDPATH**/ ?>

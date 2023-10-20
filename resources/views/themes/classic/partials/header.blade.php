@@ -8,8 +8,8 @@
             <i class="far fa-bars"></i>
         </button>
         @php
-            $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-            $lastUriSegment = array_pop($uriSegments);
+        $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+        $lastUriSegment = array_pop($uriSegments);
         @endphp
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
@@ -34,6 +34,61 @@
                     <a class="nav-link @if($lastUriSegment == 'category') active @endif" href="{{ route('category') }}">@lang('Category')</a>
                 </li>
 
+
+                @isset($contentDetails['support'])
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">@lang('Selling Your Busines')</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        @foreach($contentDetails['support'] as $data)
+                        @php
+                        $fldMenuType = ''; $fldparentMenu = '';
+                        $fldMenuType = ($data->description)->menu_type;
+                        $fldparentMenu = ($data->description)->parent_menu;
+                        @endphp
+
+
+
+                        @if($fldMenuType == 'H' && $fldparentMenu == '1')
+
+                        <a class="dropdown-item" href="{{route('getLink', [slug(optional($data->description)->title), $data->content_id])}}">@lang(optional($data->description)->title)</a>
+
+                        @endif
+
+                        @endforeach
+                    </div>
+
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">@lang('Buying A Business')</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        @foreach($contentDetails['support'] as $data)
+                        @php
+                        $fldMenuType = ''; $fldparentMenu = '';
+                        $fldMenuType = ($data->description)->menu_type;
+                        $fldparentMenu = ($data->description)->parent_menu;
+                        @endphp
+
+
+
+                        @if($fldMenuType == 'H' && $fldparentMenu == '2')
+
+                        <a class="dropdown-item" href="{{route('getLink', [slug(optional($data->description)->title), $data->content_id])}}">@lang(optional($data->description)->title)</a>
+
+                        @endif
+
+                        @endforeach
+                    </div>
+
+                </li>
+
+                @endisset
+
+
                 <li class="nav-item">
                     <a class="nav-link @if($lastUriSegment == 'contact') active @endif" href="{{ route('contact') }}">@lang('Contact')</a>
                 </li>
@@ -42,11 +97,11 @@
 
         <div class="navbar-text">
             @guest
-                <a href="{{ route('login') }}" class="btn-custom">@lang('Sign in')</a>
+            <a href="{{ route('login') }}" class="btn-custom">@lang('Sign in')</a>
             @endguest
 
             @auth
-                <a href="{{ route('user.home') }}" class="btn-custom">@lang('Dashboard')</a>
+            <a href="{{ route('user.home') }}" class="btn-custom">@lang('Dashboard')</a>
             @endauth
         </div>
     </div>

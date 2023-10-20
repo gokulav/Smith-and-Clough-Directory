@@ -80,7 +80,6 @@ class FrontendController extends Controller
                 })->take(4);
 
             return view($this->theme . 'home', $data);
-
         } else {
             $data['all_listings'] = Listing::with(['get_reviews', 'get_place.details', 'get_category.details'])->latest()
                 ->when(isset($search['name']), function ($query) use ($search) {
@@ -359,7 +358,6 @@ class FrontendController extends Controller
             ->latest()->paginate(3);
 
         return view($this->theme . 'blog', $data);
-
     }
 
     public function categorySearch(Request $request)
@@ -371,7 +369,6 @@ class FrontendController extends Controller
             $data['listingCategory'] = ListingCategory::with('details')->whereHas('details', function ($q) use ($character) {
                 $q->where('name', 'LIKE', $character . '%');
             })->withCount('get_listings')->where('status', 1)->latest()->get();
-
         } else {
             $data['listingCategory'] = ListingCategory::with('details')->withCount('get_listings')->where('status', 1)->latest()->get();
         }
