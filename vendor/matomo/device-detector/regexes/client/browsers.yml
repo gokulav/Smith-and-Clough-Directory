@@ -5,13 +5,6 @@
 # @license http://www.gnu.org/licenses/lgpl.html LGPL v3 or later
 ###############
 
-# Odd Browser (https://play.google.com/store/apps/details?id=com.corproxy.browser)
-- regex: 'Odd/(\d+\.[\.\d]+)'
-  name: 'Odd Browser'
-  version: '$1'
-  engine:
-    default: 'Blink'
-
 # APN Browser
 - regex: 'Safari/537.36 (?:Browser|Navegador)'
   name: 'APN Browser'
@@ -1893,7 +1886,7 @@
     versions:
       28: 'Blink'
 
-- regex: '(?:DDG-Android-|DuckDuckGo/|ddg_android/)(\d+[\.\d]*)'
+- regex: '(?:DDG-Android-|DuckDuckGo/)(\d+[\.\d]*)'
   name: 'DuckDuckGo Privacy Browser'
   version: '$1'
   engine:

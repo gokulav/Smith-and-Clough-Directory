@@ -156,7 +156,6 @@ class OperatingSystem extends AbstractParser
         'TOS' => 'TmaxOS',
         'UBT' => 'Ubuntu',
         'WAS' => 'watchOS',
-        'WER' => 'Wear OS',
         'WTV' => 'WebTV',
         'WHS' => 'Whale OS',
         'WIN' => 'Windows',
@@ -183,7 +182,7 @@ class OperatingSystem extends AbstractParser
     protected static $osFamilies = [
         'Android'               => [
             'AND', 'CYN', 'FIR', 'REM', 'RZD', 'MLD', 'MCD', 'YNS', 'GRI', 'HAR',
-            'ADR', 'CLR', 'BOS', 'REV', 'LEN', 'SIR', 'RRS', 'WER',
+            'ADR', 'CLR', 'BOS', 'REV', 'LEN', 'SIR', 'RRS',
         ],
         'AmigaOS'               => ['AMG', 'MOR'],
         'BlackBerry'            => ['BLB', 'QNX'],

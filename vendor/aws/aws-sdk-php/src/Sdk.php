@@ -250,8 +250,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionElasticsearchService(array $args = [])
  * @method \Aws\Emr\EmrClient createEmr(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEmr(array $args = [])
- * @method \Aws\EntityResolution\EntityResolutionClient createEntityResolution(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionEntityResolution(array $args = [])
  * @method \Aws\EventBridge\EventBridgeClient createEventBridge(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionEventBridge(array $args = [])
  * @method \Aws\FIS\FISClient createFIS(array $args = [])
@@ -416,8 +414,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionMainframeModernization(array $args = [])
  * @method \Aws\ManagedBlockchain\ManagedBlockchainClient createManagedBlockchain(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionManagedBlockchain(array $args = [])
- * @method \Aws\ManagedBlockchainQuery\ManagedBlockchainQueryClient createManagedBlockchainQuery(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionManagedBlockchainQuery(array $args = [])
  * @method \Aws\ManagedGrafana\ManagedGrafanaClient createManagedGrafana(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionManagedGrafana(array $args = [])
  * @method \Aws\MarketplaceCatalog\MarketplaceCatalogClient createMarketplaceCatalog(array $args = [])
@@ -464,8 +460,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionMobile(array $args = [])
  * @method \Aws\Neptune\NeptuneClient createNeptune(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionNeptune(array $args = [])
- * @method \Aws\Neptunedata\NeptunedataClient createNeptunedata(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionNeptunedata(array $args = [])
  * @method \Aws\NetworkFirewall\NetworkFirewallClient createNetworkFirewall(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionNetworkFirewall(array $args = [])
  * @method \Aws\NetworkManager\NetworkManagerClient createNetworkManager(array $args = [])
@@ -498,8 +492,6 @@ namespace Aws;
  * @method \Aws\MultiRegionClient createMultiRegionPaymentCryptography(array $args = [])
  * @method \Aws\PaymentCryptographyData\PaymentCryptographyDataClient createPaymentCryptographyData(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionPaymentCryptographyData(array $args = [])
- * @method \Aws\PcaConnectorAd\PcaConnectorAdClient createPcaConnectorAd(array $args = [])
- * @method \Aws\MultiRegionClient createMultiRegionPcaConnectorAd(array $args = [])
  * @method \Aws\Personalize\PersonalizeClient createPersonalize(array $args = [])
  * @method \Aws\MultiRegionClient createMultiRegionPersonalize(array $args = [])
  * @method \Aws\PersonalizeEvents\PersonalizeEventsClient createPersonalizeEvents(array $args = [])
@@ -715,7 +707,7 @@ namespace Aws;
  */
 class Sdk
 {
-    const VERSION = '3.281.15';
+    const VERSION = '3.276.3';
 
     /** @var array Arguments for creating clients */
     private $args;

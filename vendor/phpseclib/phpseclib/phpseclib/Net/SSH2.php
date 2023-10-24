@@ -3428,7 +3428,7 @@ class SSH2
      */
     function isConnected()
     {
-        return ($this->bitmap & self::MASK_CONNECTED) && is_resource($this->fsock) && !feof($this->fsock);
+        return (bool) ($this->bitmap & self::MASK_CONNECTED);
     }
 
     /**

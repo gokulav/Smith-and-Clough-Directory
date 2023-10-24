@@ -871,7 +871,7 @@ class SFTP extends SSH2
 
         $error = $this->status_codes[$status];
 
-        if ($this->version > 2) {
+        if ($this->version > 2 || strlen($response) < 4) {
             extract(unpack('Nlength', $this->_string_shift($response, 4)));
             $this->sftp_errors[] = $error . ': ' . $this->_string_shift($response, $length);
         } else {
@@ -2312,7 +2312,7 @@ class SFTP extends SSH2
 
         if ($start >= 0) {
             $offset = $start;
-        } elseif ($mode & (self::RESUME | self::RESUME_START)) {
+        } elseif ($mode & self::RESUME) {
             // if NET_SFTP_OPEN_APPEND worked as it should _size() wouldn't need to be called
             $size = $this->size($remote_file);
             $offset = $size !== false ? $size : 0;
@@ -2385,11 +2385,7 @@ class SFTP extends SSH2
             if ($local_start >= 0) {
                 fseek($fp, $local_start);
                 $size-= $local_start;
-            } elseif ($mode & self::RESUME) {
-                fseek($fp, $offset);
-                $size-= $offset;
             }
-
         } elseif ($dataCallback) {
             $size = 0;
         } else {
@@ -2690,6 +2686,14 @@ class SFTP extends SSH2
 
             if ($clear_responses) {
                 break;
+            }
+        }
+
+        if ($length > 0 && $length <= $offset - $start) {
+            if ($local_file === false) {
+                $content = substr($content, 0, $length);
+            } else {
+                ftruncate($fp, $length + $res_offset);
             }
         }
 
